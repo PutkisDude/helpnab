@@ -1,7 +1,13 @@
 # Simple shell script for Linux Palvelimet -course
 
 Without parameters print:
-	 username, user's home directory, current working directory
+- username, 
+- user's home directory 
+- current working directory
+- current time
+- uptime
+- free / used RAM
+- available RAM
 
 ## Commands
 ```console
