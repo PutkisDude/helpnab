@@ -3,13 +3,15 @@
 Without parameters print:
 	 username, user's home directory, current working directory
 
-	helpnab [option]:
-	-a, -c, --commands 	show all commands in the list
-	-b, --basic 		show some basic commands
-	-f, --file 		show file commands
-	-i, --information	show information commands
-	-h, --help 		display this help and exit
+##Commands
+helpnab
+helpnab [option]:
+-a, -c, --commands 	show all commands in the list
+-b, --basic 		show some basic commands
+-f, --file 		show file commands
+-i, --information	show information commands
+-h, --help 		display this help and exit
 
-	-h, --h display help
+-h, --h display help
 	
 
