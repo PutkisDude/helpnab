@@ -1,6 +1,6 @@
 # Simple shell script for Linux Palvelimet -course
 
-![nabhelp](nabhelp.png)
+![nabhelp](helpnab.png)
 
 Without parameters print:
 - username, 
