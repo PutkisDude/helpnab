@@ -3,7 +3,7 @@
 Without parameters print:
 	 username, user's home directory, current working directory
 
-##Commands
+## Commands
 helpnab
 helpnab [option]:
 -a, -c, --commands 	show all commands in the list
