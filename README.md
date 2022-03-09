@@ -1,7 +1,5 @@
 # Simple shell script for Linux Palvelimet -course
 
-![nabhelp](helpnab.png)
-
 Without parameters print:
 - username, 
 - user's home directory 
@@ -23,4 +21,4 @@ helpnab [option]:
 
 -h, --h display help
 	
-
+![nabhelp](helpnab.png)
