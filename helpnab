@@ -82,6 +82,8 @@ case ${option} in
 		loopCmds fileCmd[@] fileDesc[@]
 		echo "Information Commands:"
 		loopCmds infoCmd[@] infoDesc[@]
+		echo "Other commands:"
+		loopCmds otherCmd[@] otherDesc[@]
 		echo "
 Could not find the command? Google it. 
 More possible commands: alias, apt, awk, chgrp, curl, diff, echo, fdisk, file, groups, head, ln, killall, mount, reboot, rmdir, scp, shutdown, sleep, ssh, su, systemctl, tail, tar, ufw, umount, unzip, zip
