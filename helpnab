@@ -1,0 +1,116 @@
+#!/usr/bin/bash
+
+#Basic commands
+basicCmd[0]="whatis"; basicDesc[0]="Shows one line description from manual";
+basicCmd[1]="ls" basicDesc[1]="list directory contents"
+basicCmd[2]="pwd" basicDesc[2]="print working directory"
+basicCmd[3]="whoami" basicDesc[3]="display userid"
+basicCmd[4]="which" basicDesc[4]="display location of command file"
+basicCmd[5]="clear" basicDesc[5]="clear the terminal screen"
+basicCmd[6]="history"; basicDesc[6]="display terminal history";
+basicCmd[7]="sudo"; basicDesc[7]="superuser do / run commands on root rights (use with caution)";
+basicCmd[8]="kill"; basicDesc[8]="kill processes";
+#File commands
+fileCmd[0]="cat"; fileDesc[0]="print file content or concatenate files";
+fileCmd[1]="less"; fileDesc[1]="read longer files";
+fileCmd[2]="touch"; fileDesc[2]="make empty file or change timestamp on file";
+fileCmd[3]="cd"; fileDesc[3]="change directory";
+fileCmd[4]="cp"; fileDesc[4]="copy files or directories";
+fileCmd[5]="mkdir"; fileDesc[5]="make new directory";
+fileCmd[6]="mv"; fileDesc[6]="move or rename file or directory";
+fileCmd[7]="rm"; fileDesc[7]="remove file or directory";
+fileCmd[8]="chmod"; fileDesc[8]="change file permissions";
+fileCmd[9]="chown"; fileDesc[9]="change file ownership";
+fileCmd[10]="find"; fileDesc[10]="search files with given regex";
+fileCmd[11]="nano / pico / vi / vim / micro"; fileDesc[11]="text editors";
+#Information commands
+infoCmd[0]="free"; infoDesc[0]="display free and used system memory";
+infoCmd[1]="uptime"; infoDesc[1]="display system uptime";
+infoCmd[2]="top"; infoDesc[2]="display all processes and more information";
+infoCmd[3]="ps"; infoDesc[3]="display processes";
+infoCmd[4]="df"; infoDesc[4]="display disk usage";
+infoCmd[5]="lshw"; infoDesc[5]="show hardware information";
+infoCmd[6]="ip"; infoDesc[6]="show and manipulate network devices (ip addr - shows own ip-address)";
+infoCmd[7]="uname"; infoDesc[7]="display system information";
+infoCmd[8]="lscpu"; infoDesc[8]="display information about cpu";
+infoCmd[9]="w"; infoDesc[9]="list currently logged users";
+#Other Commands
+otherCmd[0]="ping"; otherDesc[0]="test reachability on internet host"
+otherCmd[1]="password"; otherDesc[1]="change user's password"
+otherCmd[2]="grep"; otherDesc[2]="search lines on file with regex"
+otherCmd[3]="man"; otherDesc[3]="open manual page"
+
+# Colors - ECOL = End color / Reset
+RED="\e[31m"
+LRED="\e[91m"
+ECOL="\e[0m"
+
+# Free / used memory
+ALLMEM=$(awk '/^Mem/ {print $2}' <(free -m))
+USEDMEM=$(awk '/^Mem/ {print $3}' <(free -m))
+AVAIL=$(awk '/^Mem/ {print $7}' <(free -m))
+
+# print some basic information
+basic_information () {
+echo "Your username: $USER" 
+echo "Your home directory: $HOME"
+echo "Your current location: $PWD"
+echo
+echo "Current time is: $(date +"%T - %d.%m.%Y")"
+echo "System uptime: $(uptime -p)"
+echo "RAM: $USEDMEM/$ALLMEM MiB"
+echo "Available RAM before swap: $AVAIL MiB"
+}
+
+#Take 2 arrays and loop them (cmds and descriptions)
+loopCmds () {
+  arr=("${!1}")
+  arr2=("${!2}")
+# ! before array name loops throught array indexes
+for i in ${!arr[@]};
+do
+	echo -e "  ${LRED}${arr[i]} ${ECOL} - ${arr2[i]}" 
+done
+}
+
+option=$1
+case ${option} in
+	"-a"|"-c"|"--commands")
+		echo 'Basic Linux Commands:'
+		loopCmds basicCmd[@] basicDesc[@]
+		echo "File Commands:"
+		loopCmds fileCmd[@] fileDesc[@]
+		echo "Information Commands:"
+		loopCmds infoCmd[@] infoDesc[@]
+		echo "
+Could not find the command? Google it. 
+More possible commands: alias, apt, awk, chgrp, curl, diff, echo, fdisk, file, groups, head, ln, killall, mount, reboot, rmdir, scp, shutdown, sleep, ssh, su, systemctl, tail, tar, ufw, umount, unzip, zip
+"		
+		;;
+	"-b"|"--basic")
+		echo "Basic Linux Commands:"
+		loopCmds basicCmd[@] basicDesc[@]
+		;;
+	"-f"|"--file")
+		echo "File Commands:"
+		loopCmds fileCmd[@] fileDesc[@]
+		;;
+	"-i"|"--information")
+		echo "Information Commands:"
+		loopCmds infoCmd[@] infoDesc[@]
+		;;
+	"-h"|"--help")
+		echo "--- helpnab [option]:
+	-a, -c, --commands 	show all commands in the list
+	-b, --basic 		show some basic commands
+	-f, --file 		show file commands
+	-i, --information	show information commands
+	-h, --help 		display this help and exit"
+		;;
+	*)
+		basic_information
+		echo
+		echo "helpnab -h or helpnab --help for commands"		
+		;;
+esac
+
