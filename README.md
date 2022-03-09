@@ -1,5 +1,7 @@
 # Simple shell script for Linux Palvelimet -course
 
+![Nabhelp](./nabhelp.jpg)
+
 Without parameters print:
 - username, 
 - user's home directory 
